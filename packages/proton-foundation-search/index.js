@@ -45,6 +45,15 @@ export class TextIndex extends Stub {}
 export class TrigramCache extends Stub {}
 export class ProcessorConfig extends Stub {}
 
+export class CollectionStats extends Stub {}
+export class FoundEntry extends Stub {}
+export class Entry extends Stub {}
+export class CleanupEvent extends Stub {}
+export class ExportEvent extends Stub {}
+export class QueryEvent extends Stub {}
+export class WriteEvent extends Stub {}
+export class InitOutput extends Stub {}
+
 export const CleanupEventKind = enumStub();
 export const ExportEventKind = enumStub();
 export const QueryEventKind = enumStub();

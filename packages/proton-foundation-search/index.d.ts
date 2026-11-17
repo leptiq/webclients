@@ -36,11 +36,11 @@ export type QueryEventKind = any;
 export declare const WriteEventKind: any;
 export type WriteEventKind = any;
 
-export type CleanupEvent = any;
-export type ExportEvent = any;
-export type QueryEvent = any;
-export type WriteEvent = any;
-export type Entry = any;
-export type FoundEntry = any;
-export type InitOutput = any;
-export type CollectionStats = any;
+export declare class CleanupEvent extends Stub {}
+export declare class ExportEvent extends Stub {}
+export declare class QueryEvent extends Stub {}
+export declare class WriteEvent extends Stub {}
+export declare class Entry extends Stub {}
+export declare class FoundEntry extends Stub {}
+export declare class InitOutput extends Stub {}
+export declare class CollectionStats extends Stub {}
