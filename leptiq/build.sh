@@ -8,6 +8,8 @@
 #
 # Apps: account (login/signup; every other app needs it), pass, pass-extension,
 # authenticator, drive, lumo. Each is built into applications/<app>/dist.
+# lumo (Leptiq Assistant) embeds the server's public key: set LUMO_PUB_KEY_PATH,
+# or the script downloads it from https://pass.$DOMAIN/api/assistant/public-key.
 set -euo pipefail
 
 : "${DOMAIN:?set DOMAIN, e.g. DOMAIN=example.com}"
@@ -43,7 +45,15 @@ for app in $APPS; do
         account) web_build account ;;
         pass) web_build pass --noLogicalScss ;;
         drive) web_build drive ;;
-        lumo) web_build lumo ;;
+        lumo)
+            # The Assistant encrypts prompts to your server's key; build it in.
+            key="${LUMO_PUB_KEY_PATH:-}"
+            if [ -z "$key" ]; then
+                key="$(mktemp)"
+                curl -fsS "https://pass.$DOMAIN/api/assistant/public-key" \
+                    -H 'x-pm-appversion: web-lumo@5.0.0' -o "$key"
+            fi
+            LUMO_PUB_KEY_PATH="$key" web_build lumo ;;
         authenticator)
             (cd applications/authenticator && API_ENV="$DOMAIN" npx webpack --config webpack.config.ts) ;;
         pass-extension)
