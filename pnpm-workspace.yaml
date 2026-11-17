@@ -174,7 +174,7 @@ hoistPattern:
 # exception for it. Yarn accepted every git dependency (approvedGitRepositories: '**').
 blockExoticSubdeps: false
 
-minimumReleaseAge: 4320
+minimumReleaseAge: 0
 minimumReleaseAgeExclude:
     - '@proton/*'
     - '@proton-meet/*'
