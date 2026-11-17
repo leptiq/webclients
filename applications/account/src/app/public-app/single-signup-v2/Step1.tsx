@@ -698,6 +698,8 @@ const Step1 = ({
     const hasUser = Boolean(model.session?.resumedSessionResult.UID);
     const isPorkbunPayment = hasUser && signupParameters.invite?.type === 'porkbun';
     hasPlanSelector = hasPlanSelector || isPorkbunPayment;
+    // Leptiq: there is a single free plan, so never show the plan selector.
+    hasPlanSelector = false;
     const hasUserSelector = !isPorkbunPayment;
 
     const checkoutView = createCheckoutView(

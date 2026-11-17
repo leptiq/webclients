@@ -70,6 +70,7 @@ function getV2DashboardSections(
             text: c('Title').t`Your plan`,
             invisibleTitle: true,
             id: 'YourPlan',
+            available: false, // Leptiq: no plans or paid-only services
             keywords: [
                 c('Action').t`Manage subscription`,
                 c('Action').t`Edit billing cycle`,
@@ -80,7 +81,7 @@ function getV2DashboardSections(
             text: c('Title').t`Compare plans`,
             invisibleTitle: true,
             id: 'YourPlanUpsell',
-            available: canPay && !planIsManagedExternally,
+            available: false, // Leptiq: no plans or paid-only services
             keywords: [
                 c('Title').t`Get complete privacy coverage`,
                 c('account_search_index').t`Upgrade plan`,
@@ -102,6 +103,7 @@ function getV2DashboardSections(
             text: c('Title').t`Also in your plan`,
             invisibleTitle: true,
             id: 'AlsoInYourPlan',
+            available: false, // Leptiq: no plans or paid-only services
             keywords: [
                 c('Title').t`Get more from your privacy suite`,
                 c('account_search_index').t`Included apps`,
@@ -143,7 +145,7 @@ function getV1DashboardSections(
         {
             text: hasSplitStorage && showStorageSection ? c('Title').t`Your plan` : undefined,
             id: 'your-plan',
-            available: canPay,
+            available: false, // Leptiq: no plans or paid-only services
             keywords: [
                 c('Action').t`Customize plan`,
                 c('Action').t`Edit billing cycle`,
@@ -527,7 +529,7 @@ export const getAccountAppRoutes = ({
                         text: c('Title').t`Your plan`,
                         invisibleTitle: true,
                         id: 'YourPlanV2',
-                        available: !(isFree && showVPNDashboardVariant === 'B'),
+                        available: false, // Leptiq: no plans or paid-only services
                         keywords: [
                             c('Action').t`Manage subscription`,
                             c('Action').t`Edit billing cycle`,
@@ -538,7 +540,7 @@ export const getAccountAppRoutes = ({
                         text: c('Title').t`Upgrade your privacy`,
                         invisibleTitle: true,
                         id: 'YourPlanUpsellsSectionV2',
-                        available: canPay && !planIsManagedExternally,
+                        available: false, // Leptiq: no plans or paid-only services
                         keywords: [
                             c('Title').t`Get complete privacy coverage`,
                             c('account_search_index').t`Upgrade plan`,
@@ -559,6 +561,7 @@ export const getAccountAppRoutes = ({
                         text: c('Title').t`Also in your plan`,
                         invisibleTitle: true,
                         id: 'VpnAlsoInYourPlanSection',
+                        available: false, // Leptiq: no plans or paid-only services
                         keywords: [
                             c('account_search_index').t`Included apps`,
                             c('account_search_index').t`Privacy services`,
@@ -597,6 +600,7 @@ export const getAccountAppRoutes = ({
             },
             subscription: {
                 id: 'subscription',
+                available: false, // Leptiq: no plans or paid-only services
                 text: c('Title').t`Subscription`,
                 noTitle: true,
                 to: '/subscription',
@@ -607,6 +611,7 @@ export const getAccountAppRoutes = ({
                         text: c('Title').t`Your plan`,
                         invisibleTitle: true,
                         id: 'YourPlanV2',
+                        available: false, // Leptiq: no plans or paid-only services
                         keywords: [
                             c('Action').t`Manage subscription`,
                             c('Action').t`Edit billing cycle`,
@@ -709,6 +714,7 @@ export const getAccountAppRoutes = ({
             },
             upgrade: {
                 id: 'upgrade',
+                available: false, // Leptiq: no plans or paid-only services
                 text: c('Title').t`Upgrade plan`,
                 to: '/upgrade',
                 icon: IcArrowUpBigLine,
@@ -717,6 +723,7 @@ export const getAccountAppRoutes = ({
                     {
                         text: '',
                         id: 'upgrade',
+                        available: false, // Leptiq: no plans or paid-only services
                         keywords: [
                             c('new_plans: title').t`Unlock premium features by upgrading`,
                             c('Action').t`View plans details`,
@@ -911,7 +918,7 @@ export const getAccountAppRoutes = ({
                     {
                         text: PROTON_SENTINEL_NAME,
                         id: 'sentinel',
-                        available: !isSSOUser,
+                        available: false, // Leptiq: no plans or paid-only services
                         keywords: [
                             c('account_search_index').t`Advanced account protection`,
                             c('account_search_index').t`High-security mode`,
@@ -921,7 +928,7 @@ export const getAccountAppRoutes = ({
                     {
                         text: DARK_WEB_MONITORING_NAME,
                         id: 'breaches',
-                        available: !isSSOUser,
+                        available: false, // Leptiq: no plans or paid-only services
                         keywords: [
                             c('Link').t`How does monitoring work?`,
                             c('account_search_index').t`Data breach alerts`,

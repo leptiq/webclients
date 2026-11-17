@@ -8,7 +8,7 @@ import { CircleLoader } from '@proton/atoms/CircleLoader/CircleLoader';
 import { Scroll } from '@proton/atoms/Scroll/Scroll';
 import { IcCheckmark } from '@proton/icons/icons/IcCheckmark';
 import { IcExclamationFilled } from '@proton/icons/icons/IcExclamationFilled';
-import { DARK_WEB_MONITORING_NAME, PASS_SHORT_APP_NAME } from '@proton/shared/lib/constants';
+import { PASS_SHORT_APP_NAME } from '@proton/shared/lib/constants';
 
 import { UpsellRef } from '../../constants';
 import { useFeatureFlag } from '../../hooks/useFeatureFlag';
@@ -17,8 +17,6 @@ import { useTelemetryEvent } from '../../hooks/useTelemetryEvent';
 import {
     selectCanCheckCompromisedPasswords,
     selectCanCheckDuplicatePasswords,
-    selectCanUseDarkWebMonitoring,
-    selectMonitorPreview,
 } from '../../store/selectors/monitor';
 import { selectOrgTOTPDisabled } from '../../store/selectors/organization';
 import { PassFeature } from '../../types/api/features';
@@ -31,9 +29,6 @@ import { useNavigate } from '../Navigation/NavigationActions';
 import { getLocalPath } from '../Navigation/routing';
 import { PassPlusPromotionButton } from '../Upsell/PassPlusPromotionButton';
 import { UpsellingModal } from '../Upsell/UpsellingModal';
-import { BreachPreviewCard } from './Breach/Card/BreachPreviewCard';
-import { BreachSummaryCard } from './Breach/Card/BreachSummaryCard';
-import { BreachUpsellCard } from './Breach/Card/BreachUpsellCard';
 import { useMonitor } from './MonitorContext';
 import { MonitorLearnMore } from './MonitorLearnMore';
 import { Sentinel } from './Sentinel/Sentinel';
@@ -46,10 +41,8 @@ export const MonitorSummary: FC = () => {
     const { features, upsellType, upgradePath } = useUpsellPlanFeatures();
     const compromisedPasswordsEnabled = useFeatureFlag(PassFeature.PassCompromisedPasswords);
 
-    const darkWebMonitoringAllowed = useSelector(selectCanUseDarkWebMonitoring);
     const compromisedPasswordsAllowed = useSelector(selectCanCheckCompromisedPasswords);
     const duplicatePasswordsAllowed = useSelector(selectCanCheckDuplicatePasswords);
-    const preview = useSelector(selectMonitorPreview);
     const orgTOTPDisabled = useSelector(selectOrgTOTPDisabled);
     const [upsellModalOpen, setUpsellModalOpen] = useState(false);
     const onUpsell = () => setUpsellModalOpen(true);
@@ -67,31 +60,10 @@ export const MonitorSummary: FC = () => {
                     <div className="flex flex-column gap-8 p-6 max-w-custom" style={{ '--max-w-custom': '80em' }}>
                         <span>
                             {c('Description')
-                                .t`With ${PASS_SHORT_APP_NAME} Monitor, stay ahead of threats by getting instant alerts if your credentials are compromised. Unlock advanced security features and detailed logs to safeguard your online presence.`}
+                                .t`${PASS_SHORT_APP_NAME} Monitor checks your saved passwords for weak or reused passwords and missing two-factor authentication.`}
                         </span>
 
-                        <section className="flex flex-column gap-4">
-                            <h3 className="text-lg text-semibold">{DARK_WEB_MONITORING_NAME}</h3>
-                            <div className="pass-monitor-grid gap-4">
-                                {darkWebMonitoringAllowed && (
-                                    <BreachSummaryCard
-                                        className="xl:self-start"
-                                        onClick={() => navigate(getLocalPath('monitor/dark-web'))}
-                                    />
-                                )}
-
-                                {!darkWebMonitoringAllowed &&
-                                    (preview ? (
-                                        <BreachPreviewCard
-                                            className="xl:self-start"
-                                            preview={preview}
-                                            onUpsell={onUpsell}
-                                        />
-                                    ) : (
-                                        <BreachUpsellCard className="xl:self-start" onUpsell={onUpsell} />
-                                    ))}
-                            </div>
-                        </section>
+                        {/* Leptiq: no dark web monitoring section (no breach data source). */}
 
                         <section className="flex flex-column gap-4">
                             <h3 className="text-lg text-semibold">{c('Title').t`Password Health`}</h3>

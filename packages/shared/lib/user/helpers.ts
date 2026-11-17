@@ -5,7 +5,7 @@ import { PRODUCT_BIT, USER_ROLES } from '../constants';
 import { hasBit } from '../helpers/bitset';
 import type { User, UserInfo, UserModel } from '../interfaces/User';
 
-const { ADMIN_ROLE, MEMBER_ROLE, FREE_ROLE } = USER_ROLES;
+const { ADMIN_ROLE, MEMBER_ROLE } = USER_ROLES;
 
 export const hasPaidMail = (user: User) => hasBit(user.Subscribed, PRODUCT_BIT.MAIL);
 export const hasPaidDrive = (user: User) => hasBit(user.Subscribed, PRODUCT_BIT.DRIVE);
@@ -26,7 +26,9 @@ export const isAdminOrLoginAsAdmin = (user: UserModel) =>
 export const isMember = (user: User) => user.Role === MEMBER_ROLE;
 export const isSelf = (user: User) => !user.OrganizationPrivateKey && !user.Flags?.['delegated-access'];
 export const isDelinquent = (user: User) => !!user.Delinquent;
-export const canPay = (user: User) => [ADMIN_ROLE, FREE_ROLE].includes(user.Role);
+// Leptiq: nothing is sold on a self-hosted server, so no user can pay. This
+// hides billing, plan and upgrade UI everywhere that checks it.
+export const canPay = (_user: User) => false;
 
 const getInfo = (User: User): UserInfo => {
     return {

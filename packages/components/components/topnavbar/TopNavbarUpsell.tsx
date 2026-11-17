@@ -19,13 +19,16 @@ const LazyTopNavbarUpsellInner = lazy(
     () => import(/* webpackChunkName: "TopNavbarUpsellInner" */ './TopNavbarUpsellInner')
 );
 
+const LEPTIQ_NO_UPSELL = true;
+
 const TopNavbarUpsell = ({ app, offerProps }: Props) => {
     const [userSettings, loadingUserSettings] = useUserSettings();
 
     // don't upsell during B2B trial
     const { hasAtLeastOneB2BTrial } = useTrialInfo();
 
-    if (hasAtLeastOneB2BTrial || loadingUserSettings) {
+    // Leptiq: nothing to upgrade to on a self-hosted server.
+    if (LEPTIQ_NO_UPSELL || hasAtLeastOneB2BTrial || loadingUserSettings) {
         return null;
     }
 

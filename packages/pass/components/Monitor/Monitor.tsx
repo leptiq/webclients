@@ -9,7 +9,6 @@ import { SubSidebar } from '../Layout/Section/SubSidebar';
 import { ItemSwitch } from '../Navigation/ItemSwitch';
 import { removeLocalPath } from '../Navigation/routing';
 import { Missing2FAs } from './2FA/Missing2FAs';
-import { DarkWebMonitoring } from './Breach/DarkWebMonitoring';
 import { ExcludedItems } from './Item/ExcludedItems';
 import { MonitorProvider } from './MonitorProvider';
 import { MonitorSummary } from './MonitorSummary';
@@ -32,7 +31,7 @@ export const Monitor: FC<RouteChildrenProps> = ({ match }) => {
                     <Route path={`${match?.path}/weak`} component={WeakPasswords} />
                     <Route path={`${match?.path}/compromised`} component={CompromisedPasswords} />
                     <Route path={`${match?.path}/excluded`} component={ExcludedItems} />
-                    <Route path={`${match?.path}/dark-web`} component={DarkWebMonitoring} />
+                    {/* Leptiq: no dark web monitoring (no breach data source). */}
                     <Route component={MonitorSummary} />
                 </Switch>
             </SubSidebar>
