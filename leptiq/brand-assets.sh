@@ -43,6 +43,30 @@ done
 # Shared images (Pass lobby icon...).
 cp "$MARK" "$WC/packages/styles/assets/img/pass/protonpass-icon.svg"
 
+# Lumo ("Leptiq Assistant") logos: glyph-only files get the mark, wordmarks get
+# the mark plus "Leptiq Assistant" (white text in the -dark variants).
+LUMO="$WC/packages/styles/assets/img/lumo"
+python3 - "$MARK" "$LUMO" <<'PY'
+import re, sys, os
+mark, lumo = sys.argv[1], sys.argv[2]
+src = open(mark).read()
+inner = re.search(r'<svg[^>]*>(.*)</svg>', src, re.S).group(1)
+glyph = lambda x, y, size: f'<svg x="{x}" y="{y}" width="{size}" height="{size}" viewBox="328 344 540 540">{inner}</svg>'
+def wordmark(color):
+    return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64">'
+            + glyph(0, 0, 64)
+            + f'<text x="74" y="42" fill="{color}" font-family="Inter, system-ui, sans-serif" font-size="30">'
+            + '<tspan font-weight="700">Leptiq</tspan><tspan font-weight="400"> Assistant</tspan></text></svg>')
+for name in os.listdir(lumo):
+    path = os.path.join(lumo, name)
+    if not name.endswith('.svg'):
+        continue
+    if name in ('lumo-cat-icon.svg', 'lumo-cat-logo-v5.svg', 'lumo-cat-main.svg') or re.match(r'lumo-logo-v\d', name, re.I):
+        open(path, 'w').write(src)
+    elif name.startswith(('lumo-logo-wordmark', 'lumo-logo-full', 'lumo-business-logo')):
+        open(path, 'w').write(wordmark('#FFFFFF' if 'dark' in name else '#1B1340'))
+PY
+
 # Authenticator desktop (Tauri) icons.
 ICONS="$WC/applications/authenticator/src-tauri/icons"
 if [ -d "$ICONS" ]; then

@@ -1,9 +1,12 @@
 // Leptiq stub typings: permissive, the engine is unavailable at runtime.
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// Any member: callable with or without type arguments, or used as a value.
 declare class Stub {
     constructor(...args: any[]);
     [key: string]: any;
-    static [key: string]: any;
+    // Results the apps iterate with typed callbacks.
+    rank(...args: any[]): any[];
+    attribute(...args: any[]): any[];
 }
 
 export default function init(...args: any[]): Promise<any>;
@@ -11,21 +14,51 @@ export declare function initSync(...args: any[]): any;
 export declare function setPanicHook(): void;
 export declare function enableTracing(...args: any[]): void;
 
-export declare class Engine extends Stub {}
-export declare class Document extends Stub {}
-export declare class Value extends Stub {}
-export declare class Expression extends Stub {}
-export declare class Func extends Stub {}
-export declare class TermValue extends Stub {}
-export declare class Query extends Stub {}
-export declare class SerDes extends Stub {}
-export declare class Cached extends Stub {}
-export declare class Cleanup extends Stub {}
-export declare class Write extends Stub {}
-export declare class Execution extends Stub {}
-export declare class TextIndex extends Stub {}
-export declare class TrigramCache extends Stub {}
-export declare class ProcessorConfig extends Stub {}
+export declare class Engine extends Stub {
+    static [key: string]: any;
+}
+export declare class Document extends Stub {
+    static [key: string]: any;
+}
+export declare class Value extends Stub {
+    static [key: string]: any;
+}
+export declare class Expression extends Stub {
+    static [key: string]: any;
+}
+export declare class Func extends Stub {
+    static [key: string]: any;
+}
+export declare class TermValue extends Stub {
+    static [key: string]: any;
+}
+export declare class Query extends Stub {
+    static [key: string]: any;
+}
+export declare class SerDes extends Stub {
+    static [key: string]: any;
+}
+export declare class Cached extends Stub {
+    static [key: string]: any;
+}
+export declare class Cleanup extends Stub {
+    static [key: string]: any;
+}
+export declare class Write extends Stub {
+    static [key: string]: any;
+}
+export declare class Execution extends Stub {
+    static [key: string]: any;
+}
+export declare class TextIndex extends Stub {
+    static [key: string]: any;
+}
+export declare class TrigramCache extends Stub {
+    static [key: string]: any;
+}
+export declare class ProcessorConfig extends Stub {
+    static [key: string]: any;
+}
 
 export declare const CleanupEventKind: any;
 export type CleanupEventKind = any;
@@ -36,11 +69,27 @@ export type QueryEventKind = any;
 export declare const WriteEventKind: any;
 export type WriteEventKind = any;
 
-export declare class CleanupEvent extends Stub {}
-export declare class ExportEvent extends Stub {}
-export declare class QueryEvent extends Stub {}
-export declare class WriteEvent extends Stub {}
-export declare class Entry extends Stub {}
-export declare class FoundEntry extends Stub {}
-export declare class InitOutput extends Stub {}
-export declare class CollectionStats extends Stub {}
+export declare class CleanupEvent extends Stub {
+    static [key: string]: any;
+}
+export declare class ExportEvent extends Stub {
+    static [key: string]: any;
+}
+export declare class QueryEvent extends Stub {
+    static [key: string]: any;
+}
+export declare class WriteEvent extends Stub {
+    static [key: string]: any;
+}
+export declare class Entry extends Stub {
+    static [key: string]: any;
+}
+export declare class FoundEntry extends Stub {
+    static [key: string]: any;
+}
+export declare class InitOutput extends Stub {
+    static [key: string]: any;
+}
+export declare class CollectionStats extends Stub {
+    static [key: string]: any;
+}

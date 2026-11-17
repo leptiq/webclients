@@ -21,7 +21,8 @@ import { PublicHeader } from '../Guest/PublicHeader';
 import TermsAndConditions from '../TermsAndConditions';
 import WhatsNew from '../WhatsNew/WhatsNew';
 import { ImageLimitNotice } from './ImageLimitNotice';
-import LumoCatAnimation from './MainContainer/LumoCatAnimation';
+// Leptiq: the Leptiq mark instead of Lumo's animated cat.
+import leptiqMark from '@proton/styles/assets/img/lumo/lumo-cat-icon.svg';
 import LumoMainText from './MainContainer/LumoMainText';
 import MainContainerFooter from './MainContainer/MainContainerFooter';
 import ProtectedByProton from './MainContainer/ProtectedByProton';
@@ -106,7 +107,7 @@ const MainContainer = ({ isProcessingAttachment, initialQuery, prefillQuery }: M
                         }}
                     >
                         <div className="lumo-welcome-section flex flex-column items-center text-center w-full">
-                            <LumoCatAnimation isGhostMode={isGhostChatMode} />
+                            <img src={leptiqMark} alt="Leptiq Assistant" width={96} height={96} className="mx-auto" />
                             <LumoMainText isSmallScreen={isSmallScreen} isGhostMode={isGhostChatMode} />
                         </div>
                         {!isDesktopOnboardingBlocking &&

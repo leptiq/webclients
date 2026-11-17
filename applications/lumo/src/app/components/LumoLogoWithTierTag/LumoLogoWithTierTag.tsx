@@ -19,15 +19,8 @@ export const getLogoSrc = (theme: ThemeTypes) => {
     return theme === ThemeTypes.LumoDark ? lumoLogov6Dark : lumoLogov6;
 };
 
-const getTierTag = (hasLumoB2B: boolean, hasLumoSeat: boolean): LumoTierTag | null => {
-    if (hasLumoB2B) {
-        return 'pro';
-    }
-    if (hasLumoSeat) {
-        return 'plus';
-    }
-    return null;
-};
+// Leptiq: no plan tiers, so no "Plus"/"Pro" tag next to the logo.
+const getTierTag = (_hasLumoB2B: boolean, _hasLumoSeat: boolean): LumoTierTag | null => null;
 
 const getAltText = (tierTag: LumoTierTag | null) => {
     if (tierTag === 'pro') {
