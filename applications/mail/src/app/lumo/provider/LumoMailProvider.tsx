@@ -30,6 +30,7 @@ import { MESSAGE_ACTIONS } from '@proton/mail-message/constants';
 import type { RecipientType } from '@proton/mail-message/models/address';
 import type { ConversationResult } from '@proton/mail-message/store/conversations/conversationsTypes';
 import { useCategoriesData } from '@proton/mail/features/categoriesView/useCategoriesData';
+import { useCategoriesTelemetry } from '@proton/mail/features/categoriesView/useCategoriesTelemetry';
 import { addFilter as addFilterAction, updateFilter as updateFilterAction } from '@proton/mail/store/filters/actions';
 import { useFilters } from '@proton/mail/store/filters/hooks';
 import { createLabel as createLabelAction, updateLabel as updateLabelAction } from '@proton/mail/store/labels/actions';
@@ -53,6 +54,8 @@ import { MailFeatureFlag } from '@proton/unleash/Flags';
 import { useFlag } from '@proton/unleash/useFlag';
 
 import { useEncryptedSearchContext } from '../../containers/EncryptedSearchProvider';
+import { isElementConversation } from '../../helpers/elements';
+import { useMoveEngine } from '../../helpers/location/MoveEngine/useMoveEngine';
 import { useApplyLocation } from '../../hooks/actions/applyLocation/useApplyLocation';
 import { useMarkAs } from '../../hooks/actions/markAs/useMarkAs';
 import useSnooze from '../../hooks/actions/useSnooze';
@@ -97,6 +100,7 @@ const LumoMailBody = memo(function LumoMailBody({ onValue }: PublisherProps<Lumo
     const api = useApi();
     const history = useHistory();
     const { applyLocation, applyMultipleLocations } = useApplyLocation();
+    const { conversationMoveEngine, messageMoveEngine } = useMoveEngine();
     const { markAs } = useMarkAs();
     const { snooze } = useSnooze();
     const initializeMessage = useInitializeMessage();
@@ -110,6 +114,7 @@ const LumoMailBody = memo(function LumoMailBody({ onValue }: PublisherProps<Lumo
     // Not `useCategoriesView`, whose `shouldShowTabs` also requires the user to be sitting in the Inbox:
     // a mark-all scoped to a category is valid from wherever they are.
     const { activeCategoriesTabs } = useCategoriesData();
+    const { sendReportRecategorizeEmail } = useCategoriesTelemetry();
     const [mailSettings] = useMailSettings();
     const [contactEmails = []] = useContactEmails();
     const [userSettings] = useUserSettings();
@@ -133,6 +138,8 @@ const LumoMailBody = memo(function LumoMailBody({ onValue }: PublisherProps<Lumo
         history,
         applyLocation,
         applyMultipleLocations,
+        conversationMoveEngine,
+        messageMoveEngine,
         markAs,
         snooze,
         initializeMessage,
@@ -145,6 +152,7 @@ const LumoMailBody = memo(function LumoMailBody({ onValue }: PublisherProps<Lumo
         labels,
         filters,
         activeCategoriesTabs,
+        sendReportRecategorizeEmail,
         mailSettings,
         contactEmails,
         userSettings,
@@ -216,6 +224,15 @@ const LumoMailBody = memo(function LumoMailBody({ onValue }: PublisherProps<Lumo
             applyLocation: (params) => latest.current.applyLocation(params),
             // async so applyMultipleLocations' synchronous validation throws surface as a rejection.
             applyMultipleLocations: async (params) => discardResult(latest.current.applyMultipleLocations(params)),
+            reportRecategorize: (source, destination, count) => {
+                latest.current.sendReportRecategorizeEmail('move_to_folder', source, destination, count);
+            },
+            validateMove: (elements, destinationLabelID) => {
+                const engine = isElementConversation(elements[0])
+                    ? latest.current.conversationMoveEngine
+                    : latest.current.messageMoveEngine;
+                return engine.validateMove(destinationLabelID, elements, false);
+            },
             markAs: (params) => discardResult(latest.current.markAs(params)),
             // Mirrors useMarkAllAs: the thunk always finishes the pending action, so the paired start has
             // to come from here. Unwrapped so a failed request rejects.

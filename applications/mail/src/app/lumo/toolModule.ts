@@ -15,7 +15,7 @@ import type {
     updateLabel as updateLabelAction,
 } from '@proton/mail/store/labels/actions';
 import type { updateAutoresponder } from '@proton/shared/lib/api/mailSettings';
-import type { DENSITY } from '@proton/shared/lib/constants';
+import type { CategoryLabelID, DENSITY } from '@proton/shared/lib/constants';
 import type { Address, Recipient } from '@proton/shared/lib/interfaces/Address';
 import type { Folder } from '@proton/shared/lib/interfaces/Folder';
 import type { Label } from '@proton/shared/lib/interfaces/Label';
@@ -30,6 +30,7 @@ import type { ThemeInformation } from '@proton/shared/lib/themes/themes';
 import type { CreateFilter, Filter } from '@proton/sieve/filterModel';
 
 import type { SOURCE_ACTION } from '../components/list/list-telemetry/useListTelemetry';
+import type { MoveEngineCanMoveResult } from '../helpers/location/MoveEngine/moveEngineInterface';
 import type {
     ApplyLocationLabelProps,
     ApplyLocationMoveProps,
@@ -38,6 +39,7 @@ import type {
 } from '../hooks/actions/applyLocation/interface';
 import type { MarkAsParams } from '../hooks/actions/markAs/useMarkAs';
 import type { SnoozeProps } from '../hooks/actions/useSnooze';
+import type { Element } from '../models/element';
 import type { markAll as markAllAction } from '../store/elements/elementsActions';
 import type { MailStore } from '../store/store';
 
@@ -88,6 +90,17 @@ export interface MailToolDeps {
     updateAddress: (params: Parameters<typeof updateAddressThunk>[0]) => Promise<void>;
     applyLocation: ApplyLocation;
     applyMultipleLocations: (params: ApplyMultipleLocationsParams) => Promise<void>;
+    /** Mail's own report for a move between Inbox tabs, sent as a move from the folder dropdown. */
+    reportRecategorize: (
+        sourceCategoryID: CategoryLabelID,
+        destinationCategoryID: CategoryLabelID,
+        count: number
+    ) => void;
+    /**
+     * Mail's move rules for elements of one type. `applyLocation` resolves the same way when nothing is
+     * allowed to move as when it hands over to a confirmation modal, so a caller checks here first.
+     */
+    validateMove: (elements: Element[], destinationLabelID: string) => MoveEngineCanMoveResult;
     /**
      * Resolves once the optimistic update is dispatched, so it cannot report a backend failure.
      * `selectAll` is omitted: that path awaits a confirmation modal no Lumo surface renders.

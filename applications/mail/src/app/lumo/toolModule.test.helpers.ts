@@ -35,6 +35,8 @@ export const buildMailToolDeps = (overrides: Partial<MailToolDeps> = {}): MailTo
     updateAddress: jest.fn(),
     applyLocation: jest.fn(),
     applyMultipleLocations: jest.fn(),
+    reportRecategorize: jest.fn(),
+    validateMove: jest.fn(),
     markAs: jest.fn(),
     markAll: jest.fn(),
     snooze: jest.fn(),
