@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="328 344 540 540" role="img" aria-labelledby="title desc">
+  <title id="title">Golden L ribbon mark</title>
+  <desc id="desc">A stylized letter L formed from a continuous rounded golden ribbon, with a subtle folded inner shadow.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE31A"/>
+      <stop offset=".48" stop-color="#FFC400"/>
+      <stop offset="1" stop-color="#F4A900"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="0" y1="0" x2="1" y2=".25">
+      <stop offset="0" stop-color="#A94A00"/>
+      <stop offset=".55" stop-color="#D97800"/>
+      <stop offset="1" stop-color="#F5A900"/>
+    </linearGradient>
+    <linearGradient id="highlight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF34A" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFF34A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Continuous outer ribbon silhouette -->
+  <path fill="url(#gold)" d="
+    M 378 369
+    H 458
+    C 508 369 548 409 548 459
+    V 674
+    C 548 698 567 716 591 716
+    H 746
+    C 786 716 819 748 819 788
+    C 819 828 786 860 746 860
+    H 466
+    C 417 860 378 821 378 772
+    Z"/>
+
+  <!-- Curved inset creates the folded-ribbon depth of the mark -->
+  <path fill="url(#fold)" d="
+    M 385 811
+    C 386 753 428 715 484 708
+    C 519 704 548 710 579 716
+    C 550 716 532 731 532 757
+    C 532 795 501 828 461 844
+    C 427 858 397 843 385 811 Z" opacity=".98"/>
+
+  <!-- Soft golden sheen along the upright ribbon -->
+  <path fill="url(#highlight)" d="
+    M 378 369 H 458
+    C 508 369 548 409 548 459
+    V 674
+    C 548 698 567 716 591 716
+    C 526 704 467 718 426 751
+    C 397 775 383 805 378 835 Z"/>
+</svg>

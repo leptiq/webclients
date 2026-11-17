@@ -1,3 +1,41 @@
+<p align="center"><img src="leptiq/assets/leptiq-mark.svg" alt="Leptiq" width="96"></p>
+
+# Leptiq web clients
+
+A hard fork of Proton's official web clients ([ProtonMail/WebClients](https://github.com/ProtonMail/WebClients))
+for [Leptiq](https://github.com/leptiq/core) servers. It starts from upstream commit
+`4e83a148723191d6c770ede9a26d0eaafc249f17`; upstream history is not included.
+
+Changes from upstream, each in its own commit:
+
+- **Branding:** every product logo is the Leptiq mark with the product name ("Leptiq Pass",
+  "Leptiq Drive", ...; Lumo is "Leptiq Assistant"). The loading screen, favicons, browser
+  extension icons and Authenticator desktop icons use the mark.
+- **No plans or upsells:** billing, plan, upgrade and subscription UI and the signup plan
+  selector are hidden. Plan logic stays; the server reports one free "Leptiq" plan.
+- **No unavailable services:** Proton Sentinel and dark web monitoring are hidden.
+- **Builds outside Proton's network:** public npm registry, no internal-only test packages,
+  and a stub for Proton's internal search engine (local search is unavailable).
+
+## Build
+
+Needs Node.js, git and about 8 GB of RAM.
+
+```bash
+DOMAIN=example.com leptiq/build.sh                                  # account, pass, pass-extension
+DOMAIN=example.com APPS="account pass drive" leptiq/build.sh
+DOMAIN=example.com APPS=pass-extension BUILD_TARGET=firefox leptiq/build.sh
+```
+
+Apps: `account` (login and signup; every other app needs it), `pass`, `pass-extension`,
+`authenticator`, `drive`, `lumo`. Each is built into `applications/<app>/dist`. Serve them
+as described in the Leptiq [deployment guide](https://github.com/leptiq/core/blob/main/docs/deployment.md).
+
+"Proton" is a trademark of Proton AG. This project is not affiliated with Proton.
+The upstream README follows.
+
+---
+
 # Web clients
 
 This project is a monorepo hosting the Proton web clients. It includes the web applications, their dependencies & shared modules as well as all tooling surrounding development of the web clients (as well as some additional miscellaneous things).
