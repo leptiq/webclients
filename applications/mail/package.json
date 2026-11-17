@@ -51,7 +51,7 @@
         "@proton/payments": "workspace:^",
         "@proton/payments-ui": "workspace:^",
         "@proton/polyfill": "workspace:^",
-        "@proton/proton-foundation-search": "3.0.1",
+        "@proton/proton-foundation-search": "workspace:^",
         "@proton/react-redux-store": "workspace:^",
         "@proton/redux-shared-store": "workspace:^",
         "@proton/redux-shared-store-types": "workspace:^",

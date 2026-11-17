@@ -2309,8 +2309,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages/polyfill
       '@proton/proton-foundation-search':
-        specifier: 2.0.0-rc1
-        version: 2.0.0-rc1
+        specifier: workspace:^
+        version: link:../../packages/proton-foundation-search
       '@proton/redux-shared-store':
         specifier: workspace:^
         version: link:../../packages/redux-shared-store
@@ -2731,8 +2731,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages/polyfill
       '@proton/proton-foundation-search':
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: workspace:^
+        version: link:../../packages/proton-foundation-search
       '@proton/react-redux-store':
         specifier: workspace:^
         version: link:../../packages/react-redux-store
@@ -3134,8 +3134,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages/polyfill
       '@proton/proton-foundation-search':
-        specifier: 3.0.1
-        version: 3.0.1
+        specifier: workspace:^
+        version: link:../../packages/proton-foundation-search
       '@proton/react-redux-store':
         specifier: workspace:^
         version: link:../../packages/react-redux-store
@@ -9786,6 +9786,8 @@ importers:
       oxlint-tsgolint:
         specifier: 'catalog:'
         version: 7.0.2006
+
+  packages/proton-foundation-search: {}
 
   packages/raw-images:
     devDependencies:
@@ -16735,15 +16737,6 @@ packages:
 
   '@proton-meet/proton-meet-core@1.3.14':
     resolution: {integrity: sha512-IIHLH7MSx5EiSASaqDgwij9ibiR6bbkZtYofXjOEBDPU7OqVcm7wFcYmpUFuuSy/dDfps4Pi4RvBAA7v6ZWEJw==}
-
-  '@proton/proton-foundation-search@2.0.0':
-    resolution: {integrity: sha1-J3gG0qex9OaAvj6LrRf8l93dd+E=}
-
-  '@proton/proton-foundation-search@2.0.0-rc1':
-    resolution: {integrity: sha1-qgaLVUs/ig6g3i6qeuYJH64GZyM=}
-
-  '@proton/proton-foundation-search@3.0.1':
-    resolution: {integrity: sha1-XbFhpizcxJcGk9qRIDvVpeGwgMM=}
 
   '@protontech/authenticator-rust-core@0.28.8':
     resolution: {integrity: sha512-1pjTHiWq+ok5BOJdnckBC9kEyvIb7H5t7/XoqYVov0RhX1+b0PPatiMlXem3pZDLE3n8TKRP567vGnnKHStAjw==}
@@ -34675,12 +34668,6 @@ snapshots:
       - use-sync-external-store
 
   '@proton-meet/proton-meet-core@1.3.14': {}
-
-  '@proton/proton-foundation-search@2.0.0': {}
-
-  '@proton/proton-foundation-search@2.0.0-rc1': {}
-
-  '@proton/proton-foundation-search@3.0.1': {}
 
   '@protontech/authenticator-rust-core@0.28.8': {}
 

@@ -1,0 +1,9 @@
+{
+    "name": "@proton/proton-foundation-search",
+    "version": "0.0.0-leptiq",
+    "description": "Leptiq stub for Proton's internal search engine (not published publicly). Local search is unavailable.",
+    "license": "GPL-3.0",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "sideEffects": false
+}
