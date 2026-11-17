@@ -1,12 +1,12 @@
-import type { IconSize } from '@proton/icons/types';
-import vpnPassLogoSvg from '@proton/styles/assets/img/illustrations/bundle-vpn-pass.svg';
+// Leptiq: every product logo is the Leptiq mark plus the product name.
+import LeptiqLogo from './LeptiqLogo';
 
 interface VpnPassLogoProps {
-    size?: IconSize;
+    size?: number;
 }
 
-const VpnPassLogo = ({ size = 15 }: VpnPassLogoProps) => {
-    return <img src={vpnPassLogoSvg} alt="" className={`icon-size-${size}`} />;
-};
+const VpnPassLogo = ({ size = 15 }: VpnPassLogoProps) => (
+    <LeptiqLogo variant="glyph-only" style={{ width: size, height: size }} />
+);
 
 export default VpnPassLogo;

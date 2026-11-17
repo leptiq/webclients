@@ -13,20 +13,7 @@ export interface ProtonLoaderProps extends ComponentPropsWithoutRef<'svg'> {
     type?: ProtonLoaderType;
 }
 
-const defaultColors = {
-    fill: '#6D4AFF',
-    stopColor: '#FFFFFF',
-    stopColor2: '#6D4BFD',
-};
-
-const negativeColors = {
-    fill: '#FFFFFF',
-    stopColor: '#6D4AFF',
-    stopColor2: '#FFFFFF',
-};
-
 export const ProtonLoader = ({ className, type = ProtonLoaderType.Default, ...rest }: ProtonLoaderProps) => {
-    const colors = type === 'negative' ? negativeColors : defaultColors;
     const logoId = `p-logo-${type}`;
     const logoGradientId = `p-logo-gradient-${type}`;
     const gradientId = `p-gradient-${type}`;
@@ -45,30 +32,37 @@ export const ProtonLoader = ({ className, type = ProtonLoaderType.Default, ...re
             style={{ '--w-custom': '10em' }}
             {...rest}
         >
-            <path
-                id={logoId}
-                fill={colors.fill}
-                d="M5.88 41.353v14.56H16.1V41.985a5.11 5.11 0 015.11-5.11h10.479a18.436 18.436 0 0018.435-18.437A18.434 18.434 0 0031.69 0H5.88v18.2H16.1V9.618h14.897a8.723 8.723 0 110 17.445H20.166A14.281 14.281 0 005.88 41.353z"
-            />
-            <path
-                id={logoGradientId}
-                fill={`url(#${gradientId})`}
-                d="M21.207 36.873A15.328 15.328 0 005.88 52.2v3.712H16.1V41.983a5.11 5.11 0 015.107-5.11z"
-            />
+            {/* Leptiq: the golden "L" mark (source viewBox 0 0 1200 1200) with the light sweep. */}
+            <g transform="scale(0.1037) translate(-328 -344)">
+                <path
+                    id={logoId}
+                    fill={type === 'negative' ? '#FFFFFF' : `url(#${gradientId})`}
+                    d="M 378 369 H 458 C 508 369 548 409 548 459 V 674 C 548 698 567 716 591 716 H 746 C 786 716 819 748 819 788 C 819 828 786 860 746 860 H 466 C 417 860 378 821 378 772 Z"
+                />
+                <path
+                    id={logoGradientId}
+                    fill={type === 'negative' ? '#E0E0E0' : '#D97800'}
+                    opacity=".9"
+                    d="M 385 811 C 386 753 428 715 484 708 C 519 704 548 710 579 716 C 550 716 532 731 532 757 C 532 795 501 828 461 844 C 427 858 397 843 385 811 Z"
+                />
+            </g>
             <mask id={lightMaskId} style={{ maskType: 'alpha' }}>
-                <use href={`#${logoId}`} />
+                <g transform="scale(0.1037) translate(-328 -344)">
+                    <use href={`#${logoId}`} />
+                </g>
             </mask>
             <g mask={`url(#${lightMaskId})`}>
                 <circle className="proton-loader-light" cx="40" cy="-52" r="50" fill={`url(#${lightGradientId})`} />
             </g>
             <defs>
                 <radialGradient id={lightGradientId}>
-                    <stop stopColor={colors.stopColor} stopOpacity=".5" />
-                    <stop stopColor={colors.stopColor} stopOpacity="0" offset="1" />
+                    <stop stopColor="#FFFFFF" stopOpacity=".5" />
+                    <stop stopColor="#FFFFFF" stopOpacity="0" offset="1" />
                 </radialGradient>
-                <linearGradient id={gradientId} x1="13" x2="13" y1="53" y2="32" gradientUnits="userSpaceOnUse">
-                    <stop stopColor={colors.stopColor2} />
-                    <stop stopColor="#1C0554" offset="1" />
+                <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+                    <stop stopColor="#FFE31A" />
+                    <stop stopColor="#FFC400" offset=".48" />
+                    <stop stopColor="#F4A900" offset="1" />
                 </linearGradient>
             </defs>
         </svg>
