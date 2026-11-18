@@ -3,8 +3,7 @@
 # Leptiq web clients
 
 A hard fork of Proton's official web clients ([ProtonMail/WebClients](https://github.com/ProtonMail/WebClients))
-for [Leptiq](https://github.com/leptiq/core) servers. It starts from upstream commit
-`4e83a148723191d6c770ede9a26d0eaafc249f17`; upstream history is not included.
+for [Leptiq](https://github.com/leptiq/core) servers.
 
 Changes from upstream, each in its own commit:
 
